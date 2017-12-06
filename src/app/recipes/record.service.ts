@@ -38,7 +38,7 @@ export class RecordService {
       .toPromise()
 
       .then(response => {
-        return response.json().records[0];
+        return response.json().record[0];
       })
       .catch(error => {
 

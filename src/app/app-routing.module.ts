@@ -9,10 +9,10 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
 const appRoutes: Routes = [
   { path: '', redirectTo: '/records', pathMatch: 'full' },
   { path: 'records', component: RecipesComponent, children: [
-    { path: '', component: RecordStartComponent },
-    { path: 'new', component: RecipeEditComponent },
-    { path: ':id', component: RecipeDetailComponent },
-    { path: ':id/edit', component: RecipeEditComponent },
+    { path: '', component: RecordStartComponent, pathMatch: 'full' },
+    { path: 'new', component: RecipeEditComponent, pathMatch: 'full' },
+    { path: ':id', component: RecipeDetailComponent, pathMatch: 'full' },
+    { path: ':id/edit', component: RecipeEditComponent, pathMatch: 'full' },
   ] },
 ];
 

@@ -83,7 +83,7 @@ export class RecipeEditComponent implements OnInit {
   //       .then(recipe => {
   //         editrecipe = recipe;
   //         if (recipe['ingredients']) {
-  //           for (const ingredient of recipe.ingredients) {
+  //           for (const ingreng sedient of recipe.ingredients) {
   //             recipeIngredients.push(
   //               new FormGroup({
   //                 'name': new FormControl(ingredient.name, Validators.required),
