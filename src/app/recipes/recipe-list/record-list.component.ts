@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { Record } from '../record.model';
 import { RecordService } from '../record.service';
+import {Car} from "../../shared/car.model";
+import {element} from "protractor";
 
 @Component({
   selector: 'app-recipe-list',
@@ -12,12 +14,13 @@ import { RecordService } from '../record.service';
 })
 export class RecordListComponent implements OnInit, OnDestroy {
   records: Record[];
+  brands: String[];
+  cNames: String[];
   subscription: Subscription;
 
   constructor(private recordService: RecordService,
               private router: Router,
               private route: ActivatedRoute) {
-
   }
 
   ngOnInit() {
@@ -32,6 +35,27 @@ export class RecordListComponent implements OnInit, OnDestroy {
       );
     this.recordService.getRecords().then(rec => {
       this.records = rec;
+    });
+    this.brands = new Array<string>();
+    this.cNames = new Array<string>();
+  }
+
+  getAllBrands() {
+    this.recordService.getRecords().then(rec => {
+      this.records = rec;
+      this.records.forEach(element => {
+        this.brands.push(element.car.brand);
+        console.log(this.brands);
+      });
+    });
+  }
+  getAllCircuitNames() {
+    this.recordService.getRecords().then(rec => {
+      this.records = rec;
+      this.records.forEach(element => {
+        this.cNames.push(element.circuit.name);
+        console.log(this.cNames);
+      });
     });
   }
 

@@ -9,22 +9,18 @@
   <div class="col-sm-4">
     <div class="form-group">
       <label for="sel1">Select Circuit:</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
+      <select class="form-control" (focus)="getAllCircuitNames()" id="sel1">
+        <option>-</option>
+        <option *ngFor="let c of cNames" [value]="c">{{c}}</option>
       </select>
     </div>
   </div>
     <div class="col-sm-4">
       <div class="form-group">
         <label for="sel2">Select Car:</label>
-        <select class="form-control" id="sel2">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
+        <select class="form-control" (focus)="getAllBrands()" id="sel2">
+          <option>-</option>
+          <option *ngFor="let b  of brands" [value]="b" >{{b}}</option>
         </select>
       </div>
     </div>
