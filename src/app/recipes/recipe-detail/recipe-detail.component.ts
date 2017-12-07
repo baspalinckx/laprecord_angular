@@ -3,8 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Record } from '../record.model';
 import { RecordService } from '../record.service';
-import {Car} from '../../shared/car.model';
-import {Circuit} from '../../shared/circuit.model';
+
 
 
 @Component({
@@ -25,8 +24,10 @@ export class RecipeDetailComponent implements OnInit {
       .subscribe(
         (params: Params) => {
           this.id = params['id'];
+          console.log(this.id);
           this.recordService.getRecord(this.id).then(rec => {
             this.record = rec;
+            console.log(this.record);
           });
         }
       );
@@ -42,8 +43,10 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   onDeleteRecord() {
-    this.recordService.deleteRecord(this.id);
-    this.router.navigate(['/recipes']);
+    if (window.confirm('Are sure you want to delete this record ?')) {
+      this.recordService.deleteRecord(this.id);
+      this.router.navigate(['/recipes']);
+    }
   }
 
 }

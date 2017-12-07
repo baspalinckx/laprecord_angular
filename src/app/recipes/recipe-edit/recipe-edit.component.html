@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col-xs-12">
-    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="recordForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-xs-12">
           <button
             type="submit"
             class="btn btn-success"
-            [disabled]="!recipeForm.valid"
+            [disabled]="!recordForm.valid"
           >Save</button>
           <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
         </div>
@@ -14,11 +14,12 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
-            <label for="name">Name</label>
+            <h3>Record Info</h3>
+            <label for="time">Lap Time</label>
             <input
               type="text"
-              id="name"
-              formControlName="name"
+              id="time"
+              formControlName="time"
               class="form-control">
           </div>
         </div>
@@ -26,70 +27,123 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
-            <label for="imagePath">Image URL</label>
+            <label for="weather">Weather Condition</label>
             <input
               type="text"
-              id="imagePath"
-              formControlName="imagePath"
+              id="weather"
+              formControlName="weather"
               class="form-control"
-              #imagePath>
+              >
           </div>
         </div>
       </div>
+      <hr>
       <div class="row">
-        <div class="col-xs-12">
-          <img [src]="imagePath.value" class="img-responsive">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
+        <div class="col-sm-6">
+          <div formGroupName="circuit">
+          <h3>Circuit Info</h3>
+          <p></p>
+
           <div class="form-group">
-            <label for="description">Description</label>
+            <label for="name">Name</label>
             <textarea
               type="text"
-              id="description"
+              id="name"
               class="form-control"
-              formControlName="description"
-              rows="6"></textarea>
+              formControlName="name"
+              rows="1"></textarea>
           </div>
+          <div class="form-group">
+            <label for="country">Country</label>
+            <textarea
+              type="text"
+              id="country"
+              class="form-control"
+              formControlName="country"
+              rows="1"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="length">Length</label>
+            <textarea
+              type="text"
+              id="length"
+              class="form-control"
+              formControlName="length"
+              rows="1"></textarea>
+          </div>
+          </div>
+        </div>
+
+
+      <div class="col-sm-6">
+        <h3>Car info</h3>
+        <p></p>
+        <div formGroupName="car">
+        <div class="form-group">
+          <label for="brand">Brand</label>
+          <textarea
+            type="text"
+            id="brand"
+            class="form-control"
+            formControlName="brand"
+            rows="1"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="model">Model</label>
+          <textarea
+            type="text"
+            id="model"
+            class="form-control"
+            formControlName="model"
+            rows="1"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="type">Type</label>
+          <textarea
+            type="text"
+            id="type"
+            class="form-control"
+            formControlName="type"
+            rows="1"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="year">Year</label>
+          <textarea
+            type="text"
+            id="year"
+            class="form-control"
+            formControlName="year"
+            rows="1"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="modification">Modification</label>
+          <textarea
+            type="text"
+            id="modification"
+            class="form-control"
+            formControlName="modification"
+            rows="1"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="tire">Tyre</label>
+          <textarea
+            type="text"
+            id="tire"
+            class="form-control"
+            formControlName="tire"
+            rows="1"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="imagePath">Picture URL</label>
+          <textarea
+            type="text"
+            id="imagePath"
+            class="form-control"
+            formControlName="imagePath"
+            rows="1"></textarea>
+        </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xs-12" formArrayName="ingredients">
-          <div
-            class="row"
-            *ngFor="let ingredientCtrl of recipeForm.get('ingredients')['controls']; let i = index"
-            [formGroupName]="i"
-            style="margin-top: 10px;">
-            <div class="col-xs-8">
-              <input
-                type="text"
-                class="form-control"
-                formControlName="name">
-            </div>
-            <div class="col-xs-2">
-              <input
-                type="number"
-                class="form-control"
-                formControlName="amount">
-            </div>
-            <div class="col-xs-2">
-              <button
-                type="button"
-                class="btn btn-danger"
-                (click)="onDeleteIngredient(i)">X</button>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-xs-12">
-              <button
-                type="button"
-                class="btn btn-success"
-                (click)="onAddIngredient()">Add Ingredient</button>
-            </div>
-          </div>
-        </div>
       </div>
     </form>
   </div>
