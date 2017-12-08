@@ -9,7 +9,7 @@
   <div class="col-sm-4">
     <div class="form-group">
       <label for="sel1">Select Circuit:</label>
-      <select class="form-control" (focus)="getAllCircuitNames()" id="sel1">
+      <select class="form-control" [(ngModel)]="chosenName"  (focus)="getAllCircuitNames()" id="sel1">
         <option>-</option>
         <option *ngFor="let c of cNames" [value]="c">{{c}}</option>
       </select>
@@ -18,14 +18,14 @@
     <div class="col-sm-4">
       <div class="form-group">
         <label for="sel2">Select Car:</label>
-        <select class="form-control" (focus)="getAllBrands()" id="sel2">
+        <select class="form-control" [(ngModel)]="chosenBrand" (focus)="getAllBrands()"  id="sel2">
           <option>-</option>
-          <option *ngFor="let b  of brands" [value]="b" >{{b}}</option>
+          <option *ngFor="let b  of brands" [value]="b"  >{{b}}</option>
         </select>
       </div>
     </div>
     <div class="col-sm-4 align-self-bottom" >
-        <button class="btn btn-primary">Filter</button>
+        <button class="btn btn-primary" (click)="toFilter()">Filter</button>
     </div>
     </div>
 </div>
