@@ -46,6 +46,49 @@ export class RecordService {
       });
   }
 
+  getRecordsCarFilter(brand: string) {
+    if(brand == null)
+      return null;
+    return this.http.get(this.serverUrl + 'car/' + brand, {headers: this.headers})
+      .toPromise()
+      .then(response => {
+      this.records = response.json().record as Record[];
+      return response.json().record as Record[];
+    })
+      .catch(error => {
+        return error;
+      });
+  }
+
+  getRecordsCircuitFilter(name: string) {
+    if(name == null)
+      return null;
+    return this.http.get(this.serverUrl + 'circuit/' + name, {headers: this.headers})
+      .toPromise()
+      .then(response => {
+        this.records = response.json().record as Record[];
+        return response.json().record as Record[];
+      })
+      .catch(error => {
+        return error;
+      });
+  }
+
+  getRecordsCircuitCarFilter(name: string, brand: string) {
+    if (name && brand == null)
+      return null;
+    return this.http.get(this.serverUrl + 'circuit/' + name +  '/car/' + brand, {headers: this.headers})
+      .toPromise()
+      .then(response => {
+        this.records = response.json().record as Record[];
+        return response.json().record as Record[];
+      })
+      .catch(error => {
+        return error;
+      });
+  }
+
+
   // addIngredientsToShoppingList(ingredients: Ingredient[]) {
   //   this.slService.addIngredients(ingredients);
   // }

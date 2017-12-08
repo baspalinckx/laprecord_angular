@@ -4,6 +4,9 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { Record } from '../record.model';
 import { RecordService } from '../record.service';
+import {Car} from '../../shared/car.model';
+import {element} from 'protractor';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-recipe-list',
@@ -12,11 +15,17 @@ import { RecordService } from '../record.service';
 })
 export class RecordListComponent implements OnInit, OnDestroy {
   records: Record[];
+  brands: String[];
+  cNames: String[];
   subscription: Subscription;
+  chosenBrand: string;
+  chosenName: string;
+
 
   constructor(private recordService: RecordService,
               private router: Router,
               private route: ActivatedRoute) {
+
 
   }
 
@@ -25,14 +34,67 @@ export class RecordListComponent implements OnInit, OnDestroy {
       .subscribe(
         (recipes: Record[]) => {
           this.recordService.getRecords()
-            .then(rec =>{
+            .then(rec => {
               this.records = rec;
             });
         }
       );
     this.recordService.getRecords().then(rec => {
       this.records = rec;
+      console.log(this.records);
     });
+  }
+
+  getAllBrands() {
+    this.brands = new Array<string>();
+    this.recordService.getRecords().then(rec => {
+      this.records = rec;
+      this.records.forEach(element => {
+        this.brands.push(element.car.brand);
+        console.log(this.brands);
+      });
+    });
+  }
+  getAllCircuitNames() {
+    this.cNames = new Array<string>();
+    this.recordService.getRecords().then(rec => {
+      this.records = rec;
+      this.records.forEach(element => {
+        this.cNames.push(element.circuit.name);
+        console.log(this.cNames);
+      });
+    });
+  }
+
+  getSelectedBrand(event) {
+
+  }
+
+  toFilter() {
+    console.log(this.chosenBrand);
+    console.log(this.chosenName);
+
+    if ((this.chosenName == null || this.chosenName === '-' ) && (this.chosenBrand !== null || this.chosenBrand !== '-')) {
+      this.recordService.getRecordsCarFilter(this.chosenBrand).then(rec => {
+        this.records = rec;
+        console.log(this.records);
+      });
+    } else if ((this.chosenBrand == null || this.chosenBrand === '-')  && (this.chosenName !== null || this.chosenName !== '-')) {
+      this.recordService.getRecordsCircuitFilter(this.chosenName).then(rec => {
+        this.records = rec;
+        console.log(this.records);
+      });
+    } else if ((this.chosenBrand !== null || this.chosenBrand !== '-' ) && (this.chosenName !== null || this.chosenName !== '-')) {
+      this.recordService.getRecordsCircuitCarFilter(this.chosenName, this.chosenBrand).then(rec => {
+        this.records = rec;
+        console.log(this.records);
+      });
+    } else {
+      this.recordService.getRecords().then( rec => {
+        this.records = rec;
+        console.log(this.records);
+      });
+    }
   }
 
   onNewRecord() {
