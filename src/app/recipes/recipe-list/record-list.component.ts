@@ -21,6 +21,8 @@ export class RecordListComponent implements OnInit, OnDestroy {
   constructor(private recordService: RecordService,
               private router: Router,
               private route: ActivatedRoute) {
+    this.brands = new Array<string>();
+    this.cNames = new Array<string>();
   }
 
   ngOnInit() {
@@ -36,11 +38,12 @@ export class RecordListComponent implements OnInit, OnDestroy {
     this.recordService.getRecords().then(rec => {
       this.records = rec;
     });
-    this.brands = new Array<string>();
-    this.cNames = new Array<string>();
+
   }
 
   getAllBrands() {
+
+    this.brands = new Array<string>();
     this.recordService.getRecords().then(rec => {
       this.records = rec;
       this.records.forEach(element => {
@@ -50,6 +53,7 @@ export class RecordListComponent implements OnInit, OnDestroy {
     });
   }
   getAllCircuitNames() {
+    this.cNames = new Array<string>();
     this.recordService.getRecords().then(rec => {
       this.records = rec;
       this.records.forEach(element => {
