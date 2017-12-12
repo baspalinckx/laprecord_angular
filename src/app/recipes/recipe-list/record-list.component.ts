@@ -66,9 +66,7 @@ export class RecordListComponent implements OnInit, OnDestroy {
     });
   }
 
-  getSelectedBrand(event) {
 
-  }
 
   toFilter() {
     console.log(this.chosenBrand);

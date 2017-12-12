@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Record } from '../record.model';
 import { RecordService } from '../record.service';
+import {Car} from "../../shared/car.model";
 
 
 
@@ -12,7 +13,8 @@ import { RecordService } from '../record.service';
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent implements OnInit {
-  record: Record = new Record({imagePath: ''});
+  record: Record = new Record({});
+  cars: Car[];
   id: string;
 
   constructor(private recordService: RecordService,
@@ -28,6 +30,7 @@ export class RecipeDetailComponent implements OnInit {
           this.recordService.getRecord(this.id).then(rec => {
             this.record = rec;
             console.log(this.record);
+            this.getCarsfromCircuit(this.id);
           });
         }
       );
@@ -36,6 +39,18 @@ export class RecipeDetailComponent implements OnInit {
   // onAddToShoppingList() {
   //   this.recordService.addIngredientsToShoppingList(this.recipe.ingredients);
   // }
+
+  getCarsfromCircuit(id: string) {
+    this.cars = new Array<Car>();
+    this.recordService.getRecord(id).then(rec => {
+      this.record = rec;
+      this.recordService.getCarsfromCircuit(this.record.circuit.name).then(car => {
+        this.cars.push(car);
+        console.log(this.cars);
+      });
+    });
+  }
+
 
   onEditRecord() {
     this.router.navigate(['edit'], {relativeTo: this.route});

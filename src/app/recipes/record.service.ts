@@ -15,6 +15,7 @@ export class RecordService {
   private serverUrl = environment.serverUrl + '/records/'; // URL to web api
 
   private records: Record[];
+  private cars: Car[];
 
   constructor(private http: Http) {
   }
@@ -84,6 +85,22 @@ export class RecordService {
         return response.json().record as Record[];
       })
       .catch(error => {
+        return error;
+      });
+  }
+
+  getCarsfromCircuit(name: string) {
+    if (name == null)
+      return null;
+    return this.http.get(this.serverUrl + 'circuit/' + name + '/cars', {headers: this.headers})
+      .toPromise()
+
+      .then(response => {
+        this.cars = response.json().car as Car[];
+        return response.json().cars[0] as Car[];
+      })
+      .catch(error => {
+
         return error;
       });
   }

@@ -33,6 +33,17 @@
       <p>Name : {{record.circuit.name}}</p>
       <p>Country : {{record.circuit.country}}</p>
       <p>Length : {{record.circuit.length}}</p>
+      <p>Cars that laped this circuit:</p>
+
+        <ul class="list-group">
+        <li
+        class="list-group-item"
+
+        *ngFor="let c of cars">
+        {{ c.brand}} - {{ c.model }}
+        </li>
+        </ul>
+
     </div>
 
 </div>
