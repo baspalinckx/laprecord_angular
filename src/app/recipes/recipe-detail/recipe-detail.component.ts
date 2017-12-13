@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
-import { Record } from '../record.model';
-import { RecordService } from '../record.service';
+import {Record} from '../record.model';
+import {RecordService} from '../record.service';
 import {Car} from "../../shared/car.model";
-
 
 
 @Component({
@@ -13,13 +12,14 @@ import {Car} from "../../shared/car.model";
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent implements OnInit {
-  record: Record = new Record({});
+  record: Record = new Record({car: {imagePath: ''}, circuit: {name: ''}});
   cars: Car[];
   id: string;
 
   constructor(private recordService: RecordService,
               private route: ActivatedRoute,
-              private router: Router) {}
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.route.params
@@ -30,8 +30,13 @@ export class RecipeDetailComponent implements OnInit {
           this.recordService.getRecord(this.id).then(rec => {
             this.record = rec;
             console.log(this.record);
-            this.getCarsfromCircuit(this.id);
+            this.recordService.getCarsfromCircuit(this.record.circuit.name)
+              .then( cars => {
+                this.cars = cars;
+              });
           });
+
+
         }
       );
   }
@@ -44,9 +49,9 @@ export class RecipeDetailComponent implements OnInit {
     this.cars = new Array<Car>();
     this.recordService.getRecord(id).then(rec => {
       this.record = rec;
-      this.recordService.getCarsfromCircuit(this.record.circuit.name).then(car => {
-        this.cars.push(car);
-        console.log(this.cars);
+      this.recordService.getCarsfromCircuit(this.record.circuit.name).then(cars => {
+        this.cars.push(cars);
+        console.log('uit de service' + this.cars);
       });
     });
   }

@@ -96,8 +96,8 @@ export class RecordService {
       .toPromise()
 
       .then(response => {
-        this.cars = response.json().car as Car[];
-        return response.json().cars[0] as Car[];
+        // this.cars = response.json().cars as Car[];
+        return response.json().cars as Car[];
       })
       .catch(error => {
 
