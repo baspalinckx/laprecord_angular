@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  serverUrl: 'https://recordfrontend.herokuapp.com/records'
+  serverUrl: 'https://recordbackendmongo.herokuapp.com/api/v1'
 };
