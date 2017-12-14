@@ -43,6 +43,8 @@ export class RecordListComponent implements OnInit, OnDestroy {
       this.records = rec;
       console.log(this.records);
     });
+    this.getAllBrands();
+    this.getAllCircuitNames();
   }
 
   getAllBrands() {
@@ -66,9 +68,7 @@ export class RecordListComponent implements OnInit, OnDestroy {
     });
   }
 
-  getSelectedBrand(event) {
 
-  }
 
   toFilter() {
     console.log(this.chosenBrand);
