@@ -1,6 +1,6 @@
 # Lap Record Angular Front-end
 
-To learn more about MEAN stack development all students had to make an Angular front-end with some CRUD based operations implemented. I decided to build a web app for car enthusiast to share their fastest lap times for other to see. 
+To learn more about MEAN stack development all students had to make an Angular front-end with some CRUD based operations implemented. I decided to build a web app for car enthusiast to share their fastest lap times for others to see. 
 
 ## I learned
 
